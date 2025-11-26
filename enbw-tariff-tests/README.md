@@ -1,236 +1,236 @@
-#  Tariff Finder - Playwright Tests 🚀
+# 🚀 Setup & Installation Guide
 
-Automatisierte Playwright Tests für den **Tariff Finder** mit **22 Test Cases** über alle Szenarien hinweg.
-
----
-
-## 📋 Test-Aufgabe
-
-**Website**:
-
-**Hauptworkflow (Standard):**
-1. Zur Website navigieren
-2. PLZ-Feld ausfüllen: 
-3. Ort-Feld ausfüllen: 
-4. "Jetzt Tarif Finden" Button klicken
-5. Tariff-Ergebnisse überprüfen
+Alles was du wissen musst, um das EnBW Tariff Finder Test-Projekt neu aufzusetzen.
 
 ---
 
-## ✅ Test-Suiten (22 Tests)
+## 📋 Voraussetzungen
 
-### 📌 `tariff-finder-basic.spec.ts` (6 Tests)
-Basis-Workflow Tests für den Happy Path:
-- ✔️ Website laden und Formular anzeigen
-- ✔️ PLZ-Feld ausfüllen
-- ✔️ Ort-Feld ausfüllen
-- ✔️ Search Button klicken
-- ✔️ Ergebnisse anzeigen
-- ✔️ Kompletter Standard-Workflow
+Bevor du startest, stelle sicher, dass du folgende Software installiert hast:
 
-### 🔍 `tariff-finder-validation.spec.ts` (8 Tests)
-Validierung und Fehlerbehandlung:
-- ✔️ Leeres PLZ-Feld absenden (Error)
-- ✔️ Leeres Ort-Feld absenden (Error)
-- ✔️ Ungültiges PLZ-Format
-- ✔️ Ungültiges Ort-Format
-- ✔️ Felder löschen und neu ausfüllen
-- ✔️ Nur PLZ ausfüllen und versuchen
-- ✔️ Nur Ort ausfüllen und versuchen
-- ✔️ Tab-Navigation zwischen Feldern
+- **Node.js** (v16 oder höher) → [Download](https://nodejs.org/)
+- **npm** (kommt mit Node.js)
+- **Git** (für Repository Management) → [Download](https://git-scm.com/)
 
-### 🎯 `tariff-finder-end-to-end.spec.ts` (8 Tests)
-Komplette Benutzer-Journeys:
-- ✔️ Kompletter E2E Workflow (Stutensee)
-- ✔️ Alternative PLZ (Stuttgart) 70173
-- ✔️ Alternative PLZ (Berlin) 10115
-- ✔️ Nacheinander mehrere Suchen
-- ✔️ Datenpersistenz nach Reload
-- ✔️ Browser back Button nach Suche
-- ✔️ Mehrere Suchen ohne Neustart
-- ✔️ Tarifvergleich zwischen Orten
+### Node.js & npm überprüfen:
+```bash
+node --version  # Sollte v16+ sein
+npm --version   # Sollte v7+ sein
+```
+
+---
+
+## 📥 Projekt klonen
+
+```bash
+# Klone das Repository
+git clone https://github.com/Andrejtr4/MCP_Tariffinder.git
+
+# Wechsel ins Projekt-Verzeichnis
+cd MCP_Tariffinder/enbw-tariff-tests
+```
+
+---
+
+## 🔧 Installation - Schritt für Schritt
+
+### 1. Dependencies installieren
+```bash
+npm install
+```
+
+Das installiert alle Abhängigkeiten aus `package.json`:
+- `@playwright/test` - Playwright Testing Framework
+- `@types/node` - TypeScript Node Types
+- `typescript` - TypeScript Compiler
+
+### 2. Playwright Browser installieren
+```bash
+npx playwright install
+```
+
+Das installiert die Browser (Chromium, Firefox, WebKit):
+- **Chromium** - Für Chrome/Edge Tests
+- **Firefox** - Für Firefox Tests
+- **WebKit** - Für Safari Tests
+
+⚠️ **Wichtig**: Dieser Schritt ist **NOTWENDIG** und dauert ein paar Minuten!
+
+---
+
+## ✅ Überprüfung - Alles installiert?
+
+```bash
+# Playwright CLI überprüfen
+npx playwright --version
+
+# TypeScript überprüfen
+npx tsc --version
+```
+
+---
+
+## 🎯 Erste Tests starten
+
+### Alle Tests ausführen
+```bash
+npm test
+```
+
+### Tests mit UI Mode (Interaktiv)
+```bash
+npm run test:ui
+```
+
+### Tests im Debug Mode
+```bash
+npm run test:debug
+```
+
+### Spezifischen Test ausführen
+```bash
+npx playwright test tariff-finder-basic.spec.ts
+```
+
+### Tests mit Report anschauen
+```bash
+npm run test:report
+```
 
 ---
 
 ## 📁 Projektstruktur
 
 ```
-tariff-tests/
+enbw-tariff-tests/
+├── package.json                    # 📦 Abhängigkeiten
+├── playwright.config.ts            # ⚙️ Playwright Konfiguration
+├── tsconfig.json                   # ⚙️ TypeScript Konfiguration
+├── README.md                       # 📖 Projekt-Übersicht
+├── SETUP.md                        # 👈 Diese Datei
+│
 ├── tests/
+│   ├── fixtures.ts                 # 🔧 Test Fixtures
 │   ├── pages/
-│   │   └── EnBWTariffFinderPage.ts      # Page Object Model
-│   ├── spec/
-│   │   ├── tariff-finder-basic.spec.ts        # 6 Basic Tests
-│   │   ├── tariff-finder-validation.spec.ts   # 8 Validation Tests
-│   │   └── tariff-finder-end-to-end.spec.ts   # 8 E2E Tests
-│   └── fixtures.ts                      # Shared Test Fixtures
-├── results/
-│   ├── html-report/                     # HTML Test Report
-│   ├── test-results.json                # JSON Ergebnisse
-│   └── junit-results.xml                # JUnit XML Ergebnisse
-├── agents/
-│   └── TEST-PLAN.md                     # Detaillierter Test-Plan
-├── playwright.config.ts                 # Playwright Konfiguration
-├── package.json
-├── tsconfig.json
-└── README.md                            # Diese Datei
+│   │   └── EnBWTariffFinderPage.ts # 📄 Page Object Model
+│   └── spec/
+│       ├── tariff-finder-basic.spec.ts          # ✅ 6 Tests
+│       ├── tariff-finder-validation.spec.ts     # ✅ 8 Tests
+│       └── tariff-finder-end-to-end.spec.ts     # ✅ 8 Tests
+│
+└── results/                        # 📊 Test Reports (nach `npm test`)
 ```
 
 ---
 
-## 🎭 Page Object Model
+## 🐛 Troubleshooting
 
-**`EnBWTariffFinderPage.ts`** bietet folgende Methoden:
-
-| Methode | Beschreibung |
-|---------|-------------|
-| `navigateTo()` | Navigiert zur EnBW Tariff-Finder Seite |
-| `fillPLZ(plz: string)` | Füllt das PLZ-Feld aus |
-| `fillOrt(ort: string)` | Füllt das Ort-Feld aus |
-| `clickSearch()` | Klickt den "Jetzt Tarif Finden" Button |
-| `getTariffCount()` | Gibt Anzahl der Tarife zurück |
-| `getTariffNames()` | Gibt Array aller Tarifnamen zurück |
-| `getErrorMessage()` | Gibt Fehlermeldung zurück (wenn vorhanden) |
-| `clearPLZ()` | Löscht das PLZ-Feld |
-| `clearOrt()` | Löscht das Ort-Feld |
-
----
-
-## � Quickstart
-
-### Installation
+### Problem: `command not found: npx`
+**Lösung**: Node.js ist nicht installiert
 ```bash
-# 1. Dependencies installieren
-npm install
+# Installiere Node.js von https://nodejs.org/
+node --version  # Überprüfe Installation
+```
 
-# 2. Playwright Browser installieren
+### Problem: `Module not found`
+**Lösung**: Dependencies nicht installiert
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Problem: Playwright Browser nicht gefunden
+**Lösung**: Browser nicht installiert
+```bash
 npx playwright install
 ```
 
-### Tests ausführen
+### Problem: TypeScript Fehler
+**Lösung**: TypeScript neu kompilieren
 ```bash
-# Alle Tests starten
+npx tsc --noEmit  # Überprüfe auf Fehler
+npm install       # Reinstalliere @types/node
+```
+
+---
+
+## 🎭 Mit Generator Chatmode arbeiten
+
+Wenn du neue Tests mit dem AI Generator erstellen möchtest:
+
+```
+Du bist ein Playwright Test Generator.
+
+Generiere Tests basierend auf diesem Plan:
+[DEIN TEST-PLAN HIER]
+
+WICHTIG:
+- Alle Test-Dateien müssen in: tests/spec/
+- Page Object Model: tests/pages/EnBWTariffFinderPage.ts
+- Fixtures: tests/fixtures.ts
+- TypeScript verwenden
+- Playwright Best Practices
+```
+
+Dann müssen die generierten Tests in `tests/spec/` kopiert werden.
+
+---
+
+## 🚀 Tipps für Entwickler
+
+### Test im Watch Mode ausführen
+```bash
+npx playwright test --watch
+```
+
+### Einzelnen Test debuggen
+```bash
+npx playwright test tests/spec/tariff-finder-basic.spec.ts --debug
+```
+
+### VSCode Extension installieren
+Installiere "Playwright Test for VSCode" in VSCode für bessere Unterstützung
+
+---
+
+## ✨ Häufige Befehle
+
+```bash
+# Installation
+npm install                    # Dependencies installieren
+npx playwright install         # Browser installieren
+
+# Tests ausführen
+npm test                      # Alle Tests starten
+npm run test:ui              # UI Mode (interaktiv)
+npm run test:debug           # Debug Mode
+npm run test:headed          # Mit sichtbarem Browser
+npm run test:report          # Test Report anschauen
+
+# Code Qualität
+npx tsc --noEmit             # TypeScript überprüfen
+
+# Cleanup
+rm -rf node_modules          # node_modules löschen
+rm -rf results/              # Test Results löschen
+```
+
+---
+
+## 🆘 Weitere Hilfe
+
+- 📖 [Playwright Dokumentation](https://playwright.dev)
+- 📖 [TypeScript Dokumentation](https://www.typescriptlang.org)
+- 🐛 [Playwright GitHub Issues](https://github.com/microsoft/playwright/issues)
+
+---
+
+## ✅ Fertig?
+
+Wenn alles installiert ist, starte die Tests mit:
+
+```bash
 npm test
-
-# Tests mit UI anzeigen
-npm run test:ui
-
-# Tests mit sichtbarem Browser (headed)
-npm run test:headed
-
-# Nur Basic Tests
-npm run test:basic
-
-# Nur Validation Tests
-npm run test:validation
-
-# Nur E2E Tests
-npm run test:e2e
-
-# Debug Modus
-npm run test:debug
-
-# HTML Report anzeigen
-npm run test:report
 ```
 
----
-
-## 🎭 Agent Workflow
-
-### Phase 1: Planung (Planner)
-Der **Planner** erstellt einen detaillierten Test-Plan:
-```
-- Alle Test-Szenarien definieren
-- Schritte dokumentieren
-- Edge Cases identifizieren
-- Validierungspunkte festlegen
-```
-
-### Phase 2: Generierung (Generator)
-Der **Generator** erstellt automatisch Test-Code basierend auf dem Plan:
-```
-- Page Object Model generieren
-- Test-Dateien schreiben
-- Fixtures definieren
-- TypeScript Best Practices anwenden
-```
-
-### Phase 3: Ausführung & Debugging (Healer)
-Der **Healer** debuggt fehlgeschlagene Tests und repariert sie:
-```
-- Test-Fehler analysieren
-- Fehlerkontext sammeln
-- Code anpassen und reparieren
-- Tests neu ausführen bis grün
-```
-
----
-
-## 📊 Test-Ergebnisse
-
-Nach der Ausführung findest du die Ergebnisse unter `results/`:
-
-- **HTML Report**: `results/html-report/index.html`
-- **JSON Ergebnisse**: `results/test-results.json`
-- **JUnit XML**: `results/junit-results.xml`
-
-Öffne den HTML Report im Browser:
-```bash
-npm run test:report
-```
-
----
-
-## 🔧 Konfiguration
-
-### playwright.config.ts
-- **Base URL**: 
-- **Timeout**: 10s pro Aktion, 30s Navigation
-- **Browser**: Chromium
-- **Screenshots**: Nur bei Fehlern
-- **Videos**: Nur bei Fehlern
-- **Trace**: Immer beim ersten Fehler
-- **Retries**: 2 in CI, 0 lokal
-
-### tsconfig.json
-- **Target**: ES2020
-- **Module**: ESNext
-- **Strict Mode**: true
-- **Strict Null Checks**: true
-
----
-
-## � Troubleshooting
-
-### Tests schlagen fehl?
-```bash
-# 1. Browser neu installieren
-npx playwright install --with-deps
-
-# 2. Cache löschen
-rm -rf node_modules package-lock.json
-npm install
-
-# 3. Debug Modus starten
-npm run test:debug
-```
-
-### Wenn selektive Tests getestet werden sollen:
-```bash
-# Nach Test-Name filtern
-npx playwright test -g "should fill PLZ"
-
-# Nur Chrome Browser
-npx playwright test --project=chromium
-```
-
----
-
-## 📚 Referenzen
-
-- **Playwright Docs**: https://playwright.dev
-- **Test Plan**: `agents/TEST-PLAN.md`
-
-
-**Made with ❤️ using Playwright + TypeScript**
+Viel Erfolg! 🚀
