@@ -21,59 +21,31 @@ test.describe('EnBW Tariff Finder - Basic Workflow', () => {
     expect(url).toContain('enbw.com');
   });
 
-  test('should fill PLZ field with 76297', async () => {
-    // 1. Fill PLZ field with "76297"
-    await tariffFinderPage.fillPLZ('76297');
-
-    // Verify PLZ value
-    const plzValue = await tariffFinderPage.getPLZValue();
-    expect(plzValue).toBe('76297');
-  });
-
-  test('should fill Ort field with Stutensee', async () => {
-    // 1. Fill Ort field with "Stutensee"
-    await tariffFinderPage.fillOrt('Stutensee');
-
-    // Verify Ort value
-    const ortValue = await tariffFinderPage.getOrtValue();
-    expect(ortValue).toBe('Stutensee');
-  });
-
-  test('should have search button visible and clickable', async () => {
-    // 1. Check if search button is visible
-    const isVisible = await tariffFinderPage.isSearchButtonVisible();
-    expect(isVisible).toBe(true);
-  });
-
-  test('should complete basic search workflow for Stutensee', async () => {
-    // 1. Fill PLZ field with "76297"
+  test('should fill PLZ and Ort fields correctly', async () => {
+    // Fill PLZ field with "76297"
     await tariffFinderPage.fillPLZ('76297');
     let plzValue = await tariffFinderPage.getPLZValue();
     expect(plzValue).toBe('76297');
 
-    // 2. Fill Ort field with "Stutensee"
+    // Fill Ort field with "Stutensee"
     await tariffFinderPage.fillOrt('Stutensee');
     let ortValue = await tariffFinderPage.getOrtValue();
     expect(ortValue).toBe('Stutensee');
-
-    // 3. Click "Jetzt Tarif Finden" button
-    await tariffFinderPage.clickSearch();
-
-    // 4. Verify tariff results are displayed
-    const tariffCount = await tariffFinderPage.getTariffCount();
-    expect(tariffCount).toBeGreaterThan(0);
   });
 
-  test('should display tariff cards with content', async () => {
-    // 1. Perform search
-    await tariffFinderPage.searchTariffs('76297', 'Stutensee');
+  test('should complete search and display tariff results', async () => {
+    // Perform complete search workflow
+    await tariffFinderPage.fillPLZ('76297');
+    await tariffFinderPage.fillOrt('Stutensee');
+    await tariffFinderPage.clickSearch();
 
-    // 2. Get tariff information
+    // Verify tariff results are displayed
     const tariffCount = await tariffFinderPage.getTariffCount();
     expect(tariffCount).toBeGreaterThan(0);
 
-    // 3. Get tariff names
+    // Verify tariff names are present
     const names = await tariffFinderPage.getTariffNames();
     expect(names.length).toBeGreaterThan(0);
   });
 });
+

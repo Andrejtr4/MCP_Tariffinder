@@ -7,7 +7,7 @@ Ein vollständiges Setup mit **Playwright Tests** und **MCP Server** für Cursor
 ## 📦 Was ist drin?
 
 ### 1️⃣ **Playwright Tests** (`enbw-tariff-tests/`)
-- 22 automatisierte Tests
+- **10 automatisierte Tests** (nur Chromium Browser)
 - Page Object Model Pattern
 - TypeScript
 
