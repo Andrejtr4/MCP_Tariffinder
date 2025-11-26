@@ -99,6 +99,11 @@ tariff-tests/
 ## � Quickstart
 
 ### Installation
+cd enbw-tariff-tests
+npm install
+npx playwright install
+npm test
+
 ```bash
 # 1. Dependencies installieren
 npm install
