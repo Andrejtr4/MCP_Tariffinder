@@ -1,0 +1,25 @@
+{
+  "name": "enbw-tariff-finder-tests",
+  "version": "1.0.0",
+  "description": "Automated Playwright tests for EnBW Tariff Finder",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report results/html-report",
+    "test:basic": "playwright test tariff-finder-basic.spec.ts",
+    "test:validation": "playwright test tariff-finder-validation.spec.ts",
+    "test:e2e": "playwright test tariff-finder-end-to-end.spec.ts",
+    "codegen": "playwright codegen https://www.enbw.com/strom/privatkunden/produkte"
+  },
+  "keywords": ["playwright", "enbw", "tariff", "testing", "automation"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}
